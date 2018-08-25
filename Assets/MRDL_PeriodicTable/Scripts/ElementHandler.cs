@@ -7,39 +7,6 @@ using UnityEngine;
 
 namespace HoloToolkit.MRDL.PeriodicTable
 {
-	[System.Serializable]
-	public class ElementData
-	{
-		public string name;
-		public string category;
-		public string spectral_img;
-		public int xpos;
-		public int ypos;
-		public string named_by;
-		public float density;
-		public string color;
-		public float molar_heat;
-		public string symbol;
-		public string discovered_by;
-		public string appearance;
-		public float atomic_mass;
-		public float melt;
-		public string number;
-		public string source;
-		public int period;
-		public string phase;
-		public string summary;
-		public int boil;
-	}
-
-	[System.Serializable]
-	class ElementsData
-	{
-		public List<ElementData> elements;
-
-		public static ElementsData FromJSON( string json ) => JsonUtility.FromJson<ElementsData>( json );
-	}
-
 	public class ElementHandler : Singleton<ElementHandler>
 	{
 		List<ElementData> elements;
@@ -47,12 +14,11 @@ namespace HoloToolkit.MRDL.PeriodicTable
 
 		[SerializeField] Element elementPrefab;
 
-		[Header( "Materials" )]
+		[Header( "Materials" ),SerializeField]
+		Material AlkaliMetal;
 		[SerializeField]
-		Material
-			AlkaliMetal;
-		[SerializeField]
-		Material AlkalineEarthMetal,
+		Material 
+			AlkalineEarthMetal,
 			TransitionMetal,
 			Metalloid,
 			DiatomicNonmetal,
@@ -81,7 +47,8 @@ namespace HoloToolkit.MRDL.PeriodicTable
 		};
 
 			// Parse the elements out of the json file
-			elements = ElementsData.FromJSON( Resources.Load<TextAsset>( "JSON/PeriodicTableJSON" ).text ).elements;
+			TextAsset asset = Resources.Load<TextAsset>( "JSON/PeriodicTableJSON" );
+			elements = ElementsData.FromJSON( asset.text ).elements;
 		}
 
 		public void SetRandomElement( Element elementObj ) =>
