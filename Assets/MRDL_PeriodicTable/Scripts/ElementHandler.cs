@@ -37,10 +37,7 @@ namespace HoloToolkit.MRDL.PeriodicTable
 	{
 		public List<ElementData> elements;
 
-		public static ElementsData FromJSON( string json )
-		{
-			return JsonUtility.FromJson<ElementsData>( json );
-		}
+		public static ElementsData FromJSON( string json ) => JsonUtility.FromJson<ElementsData>( json );
 	}
 
 	public class ElementHandler : Singleton<ElementHandler>
@@ -53,8 +50,9 @@ namespace HoloToolkit.MRDL.PeriodicTable
 		[Header( "Materials" )]
 		[SerializeField]
 		Material
-			AlkaliMetal,
-			AlkalineEarthMetal,
+			AlkaliMetal;
+		[SerializeField]
+		Material AlkalineEarthMetal,
 			TransitionMetal,
 			Metalloid,
 			DiatomicNonmetal,
@@ -64,10 +62,10 @@ namespace HoloToolkit.MRDL.PeriodicTable
 			Actinide,
 			Lanthanide;
 
+		public Dictionary<string , Material> TypeMaterials => typeMaterials;
+
 		void Start( )
 		{
-			Debug.Log( "Creating arrangement" );
-
 			typeMaterials = new Dictionary<string , Material>()
 		{
 			{ "alkali metal", AlkaliMetal },
@@ -83,17 +81,11 @@ namespace HoloToolkit.MRDL.PeriodicTable
 		};
 
 			// Parse the elements out of the json file
-			TextAsset asset = Resources.Load<TextAsset>( "JSON/PeriodicTableJSON" );
-			elements = ElementsData.FromJSON( asset.text ).elements;
+			elements = ElementsData.FromJSON( Resources.Load<TextAsset>( "JSON/PeriodicTableJSON" ).text ).elements;
 		}
 
-		public void SetRandomElement( Element elementObj ) => 
+		public void SetRandomElement( Element elementObj ) =>
 			elementObj.SetFromElementData(
-				elements[ Random.Range( 0 , elements.Count ) ] ,
-				typeMaterials );
-
-		public Element Instantiate( 
-			Vector3 position , Quaternion rotation , Transform parent ) => 
-			Instantiate( elementPrefab , position , rotation , parent );
+				elements[ Random.Range( 0 , elements.Count ) ] );
 	}
 }

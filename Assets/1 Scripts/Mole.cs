@@ -109,7 +109,7 @@ public class Mole : MonoBehaviour
 			ElementHandler.I.SetRandomElement( elementObj );
 			isTimerStarted = true;
 			WindowsVoice.Speak( 
-				$"{elementObj.data.name} {elementObj.data.number}." );
+				$"{elementObj.data.name}, {elementObj.data.number}." );
 			Hide();
 		}
 	}

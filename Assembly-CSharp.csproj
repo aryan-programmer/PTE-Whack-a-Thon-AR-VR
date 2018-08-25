@@ -205,10 +205,8 @@
     <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrMathHelpers.cs" />
     <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrUIHelpers.cs" />
     <Compile Include="Assets\GoogleVR\Scripts\Video\GvrVideoPlayerTexture.cs" />
-    <Compile Include="Assets\MRDL_PeriodicTable\Scripts\Atom.cs" />
     <Compile Include="Assets\MRDL_PeriodicTable\Scripts\Element.cs" />
     <Compile Include="Assets\MRDL_PeriodicTable\Scripts\ElementHandler.cs" />
-    <Compile Include="Assets\MRDL_PeriodicTable\Scripts\PresentToPlayer.cs" />
     <Compile Include="Assets\PQAssets\Query-Chan-SD\Props\99_ShowTime\Scripts\DetectPanel.cs" />
     <Compile Include="Assets\PQAssets\Query-Chan-SD\Props\99_ShowTime\Scripts\PanelPrefCollider.cs" />
     <Compile Include="Assets\PQAssets\Query-Chan-SD\Scripts\GUIController\CameraAction.cs" />
