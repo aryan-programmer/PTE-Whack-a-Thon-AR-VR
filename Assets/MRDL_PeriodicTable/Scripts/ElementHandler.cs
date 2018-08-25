@@ -12,8 +12,6 @@ namespace HoloToolkit.MRDL.PeriodicTable
 		List<ElementData> elements;
 		Dictionary<string , Material> typeMaterials;
 
-		[SerializeField] Element elementPrefab;
-
 		[Header( "Materials" ),SerializeField]
 		Material AlkaliMetal;
 		[SerializeField]

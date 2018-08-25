@@ -6,6 +6,7 @@ public class GameManager : Singleton<GameManager>
 {
 	enum ScreenType { Start, Play, Pause, GameOver, Help }
 
+#pragma warning disable 0649
 	[SerializeField] GameObject moleContainer, fullArcadeGameObject;
 	[SerializeField] RandomizedIncreaseingTimer.Initializer initializer;
 	[Header( "Gui Elements" )]
@@ -15,6 +16,7 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField] TextMesh[] colorfulInfoTexts;
 	[SerializeField]
 	GameObject StartScreen, PlayScreen, PauseScreen, GameOverScreen, HelpScreen;
+#pragma warning restore 0649
 
 	int score;
 	Mole[] moles;

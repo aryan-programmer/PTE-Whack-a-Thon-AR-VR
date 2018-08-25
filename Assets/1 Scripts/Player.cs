@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
-using Utilities.Extensions;
 
 public class Player : Singleton<Player>
 {
+	public void HitMole( )
+	{
+
+	}
+
 	// Update is called once per frame
 	void Update( )
 	{
@@ -19,12 +23,7 @@ public class Player : Singleton<Player>
 						mole.OnHit();
 						Hammer.I.Hit( mole.transform.position );
 					}
-					mole.Get<UnityEngine.EventSystems.EventTrigger>().
-						enabled = true;
 				}
-				else
-					mole.Get<UnityEngine.EventSystems.EventTrigger>().
-						enabled = false;
 			}
 		}
 	}

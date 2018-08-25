@@ -4,7 +4,9 @@ using Utilities.Extensions;
 
 public class CheerleaderCoordinator : Singleton<CheerleaderCoordinator>
 {
+#pragma warning disable 0649
 	[SerializeField] new RuntimeAnimatorController animation;
+#pragma warning restore 0649
 
 	QuerySDMecanimController[] sQuerySDMecanimControllers;
 	private void Start( )

@@ -2,7 +2,10 @@
 
 public class Hammer : Singleton<Hammer>
 {
-	public float speed;
+#pragma warning disable 0649
+	[SerializeField] float speed;
+#pragma warning restore 0649
+
 	private Vector3 initialPosition;
 	void Start( ) => initialPosition = transform.position;
 

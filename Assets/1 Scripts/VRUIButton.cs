@@ -1,11 +1,9 @@
-﻿using UnityEngine;
-
-namespace Utilities.VRUI
+﻿namespace Utilities.VRUI
 {
-	[RequireComponent( typeof( UnityEngine.EventSystems.EventTrigger ) )]
-	public class VRUIButton : MonoBehaviour
+	[UnityEngine.RequireComponent( 
+		typeof( UnityEngine.EventSystems.EventTrigger ) )]
+	public class VRUIButton : UnityEngine.MonoBehaviour
 	{
 		public UnityEngine.Events.UnityEvent OnButtonClicked;
-		public void TriggerAllEvents( ) => OnButtonClicked.Invoke();
 	}
 }
