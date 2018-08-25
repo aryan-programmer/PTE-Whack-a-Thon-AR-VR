@@ -1,16 +1,16 @@
 ﻿using System.Collections;
 using UnityEngine;
-using Utilities;
+using Utilities.Extensions;
 
-public class CheerleaderCoordinator : MonoBehaviour
+public class CheerleaderCoordinator : Singleton<CheerleaderCoordinator>
 {
-	public new RuntimeAnimatorController animation;
+	[SerializeField] new RuntimeAnimatorController animation;
 
-	// Start is called just before any of the Update methods is called the first time
-	public void Start( )
+	QuerySDMecanimController[] sQuerySDMecanimControllers;
+	private void Start( )
 	{
 		foreach ( QuerySDMecanimController cheerleaderP in
-			GetComponentsInChildren<QuerySDMecanimController>( true ) )
+			( sQuerySDMecanimControllers = GetComponentsInChildren<QuerySDMecanimController>( true ) ) )
 			cheerleaderP.
 				GetComponentInChildren<Animator>().
 				runtimeAnimatorController = animation;
@@ -19,32 +19,33 @@ public class CheerleaderCoordinator : MonoBehaviour
 
 	public void ChooseRandomCheerleader( )
 	{
-		foreach ( QuerySDMecanimController cheerleaderP in GetComponentsInChildren<QuerySDMecanimController>( true ) )
+		foreach ( QuerySDMecanimController cheerleaderP in
+			sQuerySDMecanimControllers )
 			cheerleaderP.gameObject.SetActive( true );
 
-		QuerySDMecanimController cheerleader1 = Utils.GetRandomElementFromArray( GetComponentsInChildren<QuerySDMecanimController>() );
-		QuerySDMecanimController cheerleader2 = Utils.GetRandomElementFromArray( GetComponentsInChildren<QuerySDMecanimController>() );
+		QuerySDMecanimController cheerleader1 = sQuerySDMecanimControllers.GetRandomElement();
+		QuerySDMecanimController cheerleader2 = sQuerySDMecanimControllers.GetRandomElement();
 
 		while ( cheerleader1.gameObject.name == cheerleader2.gameObject.name )
-			cheerleader2 = Utils.GetRandomElementFromArray( GetComponentsInChildren<QuerySDMecanimController>() );
+			cheerleader2 = sQuerySDMecanimControllers.GetRandomElement();
 
 		bool cheerleader1IsOnPositivePosition = Random.Range( 0 , 2 ) == 0;
 		if ( cheerleader1IsOnPositivePosition )
 		{
-			cheerleader1.gameObject.transform.localPosition = 
+			cheerleader1.gameObject.transform.localPosition =
 				new Vector3( 2 , 0 , 0 );
-			cheerleader2.gameObject.transform.localPosition = 
+			cheerleader2.gameObject.transform.localPosition =
 				new Vector3( -2 , 0 , 0 );
 		}
 		else
 		{
-			cheerleader1.gameObject.transform.localPosition = 
+			cheerleader1.gameObject.transform.localPosition =
 				new Vector3( -2 , 0 , 0 );
-			cheerleader2.gameObject.transform.localPosition = 
+			cheerleader2.gameObject.transform.localPosition =
 				new Vector3( 2 , 0 , 0 );
 		}
-		foreach ( QuerySDMecanimController cheerleaderP in 
-			GetComponentsInChildren<QuerySDMecanimController>() )
+		foreach ( QuerySDMecanimController cheerleaderP in
+			sQuerySDMecanimControllers )
 		{
 			if ( cheerleaderP.gameObject.name !=
 				 cheerleader1.gameObject.name &&
@@ -64,12 +65,7 @@ public class CheerleaderCoordinator : MonoBehaviour
 		Win
 	}
 
-	public static void ChangeAnimation( CheerState state )
-	{
-		FindObjectOfType<CheerleaderCoordinator>().
-			StartCoroutine( FindObjectOfType<CheerleaderCoordinator>().
-			ChangeAnimIEnumerator( state ) );
-	}
+	public static void ChangeAnimation( CheerState state ) => I.StartCoroutine( I.ChangeAnimIEnumerator( state ) );
 
 	IEnumerator ChangeAnimIEnumerator( CheerState state )
 	{

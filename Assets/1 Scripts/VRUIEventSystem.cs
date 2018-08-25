@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Utilities.VRUI
 {
@@ -15,10 +13,9 @@ namespace Utilities.VRUI
 				direction: Camera.main.transform.forward ,
 				hitInfo: out RaycastHit hit ) )
 			{
-				if ( hit.collider.gameObject.GetComponent<VRUIButton>() )
+				VRUIButton button;
+				if ( button = hit.collider.gameObject.GetComponent<VRUIButton>() )
 				{
-					VRUIButton button = 
-						hit.collider.gameObject.GetComponent<VRUIButton>();
 					if ( 
 						GvrPointerInputModule.Pointer.TriggerDown || 
 						Input.GetKeyDown( KeyCode.X ) )

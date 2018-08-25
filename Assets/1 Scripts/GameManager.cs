@@ -2,7 +2,7 @@
 using Utilities;
 using Utilities.Timers;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
 	enum ScreenType { Start, Play, Pause, GameOver, Help }
 

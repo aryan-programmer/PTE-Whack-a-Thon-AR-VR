@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Hammer : MonoBehaviour
+public class Hammer : Singleton<Hammer>
 {
 	public float speed;
 	private Vector3 initialPosition;

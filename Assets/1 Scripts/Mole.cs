@@ -97,13 +97,13 @@ public class Mole : MonoBehaviour
 		{
 			this.GetAdd<AudioSource>().PlayOneShot( hitClip );
 			if ( isGolden )
-				FindObjectOfType<GameManager>().
+				GameManager.I.
 					IncreaseScore( Mathf.RoundToInt( 3 * valueMultiplier ) );
 			else if ( isEvil )
-				FindObjectOfType<GameManager>().
+				GameManager.I.
 					DecreaseScore( Mathf.RoundToInt( 15 * valueMultiplier ) );
 			else
-				FindObjectOfType<GameManager>().
+				GameManager.I.
 					IncreaseScore( Mathf.RoundToInt( valueMultiplier ) );
 			elementObj.gameObject.SetActive( true );
 			ElementHandler.I.SetRandomElement( elementObj );
