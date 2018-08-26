@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Utilities.Extensions;
 using Utilities;
 using Utilities.Timers;
 
@@ -49,7 +50,7 @@ public class GameManager : Singleton<GameManager>
 		SetEnabledScreen( ScreenType.Play );
 		ScoreText.text = $"SCORE: {score}";
 		HighscoreText.text = $"Highscore: {PlayerPrefsManager.Highscore}";
-		Utils.GetRandomElementFromArray( moles ).Rise();
+		moles.GetRandomElement().Rise();
 	}
 
 	void Update( )
@@ -73,7 +74,7 @@ public class GameManager : Singleton<GameManager>
 	private void Spawn( )
 	{
 		for ( int i = 0; i < Random.Range( 1 , 4 ); i++ )
-			Utils.GetRandomElementFromArray( moles ).Rise();
+			moles.GetRandomElement().Rise();
 	}
 
 	public void Pause( )
@@ -103,11 +104,7 @@ public class GameManager : Singleton<GameManager>
 		HighscoreText.text = $"Highscore: {PlayerPrefsManager.Highscore}";
 	}
 
-	public void PlayAgain( )
-	{
-		GameIsRunning = true;
-		SceneManagemant.LoadLevel();
-	}
+	public void PlayAgain( ) => SceneManagemant.LoadLevel();
 
 	public void Quit( ) => SceneManagemant.Quit();
 
@@ -137,8 +134,7 @@ public class GameManager : Singleton<GameManager>
 
 	internal void IncreaseScore( int points )
 	{
-		CheerleaderCoordinator.ChangeAnimation(
-			CheerleaderCoordinator.CheerState.Score );
+		CheerleaderCoordinator.ChangeAnimation( CheerleaderCoordinator.CheerState.Score );
 		score += points;
 	}
 

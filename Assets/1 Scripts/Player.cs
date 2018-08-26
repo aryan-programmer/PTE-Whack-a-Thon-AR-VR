@@ -2,26 +2,22 @@
 
 public class Player : Singleton<Player>
 {
-	public void HitMole( )
-	{
-
-	}
-
-	// Update is called once per frame
 	void Update( )
 	{
-		if ( Physics.Raycast( transform.position , transform.forward , out RaycastHit hit ) )
+		if ( GvrPointerInputModule.Pointer.TriggerDown || Input.GetKeyDown( KeyCode.X ) )
 		{
-			Mole mole;
-			if ( mole = hit.transform.GetComponent<Mole>() )
+			if ( Physics.Raycast( 
+				transform.position , 
+				transform.forward , 
+				out RaycastHit hit ) )
 			{
-				if ( !mole.Hiding )
+				Mole mole;
+				if ( mole = hit.transform.GetComponent<Mole>() )
 				{
-					if ( GvrPointerInputModule.Pointer.TriggerDown ||
-						Input.GetKeyDown( KeyCode.X ) )
+					if ( !mole.Hiding )
 					{
-						mole.OnHit();
 						Hammer.I.Hit( mole.transform.position );
+						mole.OnHit();
 					}
 				}
 			}

@@ -15,10 +15,11 @@ namespace HoloToolkit.MRDL.PeriodicTable
 		public MeshRenderer BoxRenderer;
 		public MeshRenderer PanelFront;
 
-		[HideInInspector]
-		public ElementData data;
+		ElementData data;
 
-		private Material material;
+		Material material;
+
+		public ElementData Data => data;
 
 		/// <summary>
 		/// Set the display data for this element based on the given data
@@ -31,9 +32,8 @@ namespace HoloToolkit.MRDL.PeriodicTable
 			ElementName.text = data.symbol;
 			ElementNameDetail.text = data.name;
 
-			material = ElementHandler.I.TypeMaterials[ data.category.Trim() ];
-
-			PanelFront.sharedMaterial = BoxRenderer.sharedMaterial = material;
+			PanelFront.sharedMaterial = BoxRenderer.sharedMaterial = material = 
+				ElementHandler.I.TypeMaterials[ data.category ];
 		}
 	}
 }

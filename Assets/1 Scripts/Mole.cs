@@ -6,7 +6,8 @@ using Utilities.Extensions;
 public class Mole : MonoBehaviour
 {
 #pragma warning disable 0649
-	[SerializeField] float visibleHeight = 2,
+	[SerializeField]
+	float visibleHeight = 2,
 				 hiddenHeight = -0.3f,
 				 speed = 3,
 				 dissapperDuration = 1,
@@ -14,7 +15,8 @@ public class Mole : MonoBehaviour
 				 valueMultiplier = 1;
 	[SerializeField] int MainMatIndex;
 	[SerializeField] Renderer rend;
-	[SerializeField] Material GoldenMaterial,
+	[SerializeField]
+	Material GoldenMaterial,
 					BadMaterial,
 					OrigMaterial;
 	[SerializeField] AudioClip hitClip;
@@ -27,6 +29,10 @@ public class Mole : MonoBehaviour
 	bool isTimerStarted = false;
 
 	public bool Hiding => hiding;
+
+	public AudioSource SAudioSource => __audioSource ?? ( __audioSource = this.GetAdd<AudioSource>() );
+
+	AudioSource __audioSource;
 
 	// Use this for initialization
 	void Start( )
@@ -67,7 +73,7 @@ public class Mole : MonoBehaviour
 		{
 			if ( Random.Range( 0 , 3 ) == 1 )
 			{
-				Material[] mats = rend.materials;
+				var mats = rend.materials;
 				mats[ MainMatIndex ] = GoldenMaterial;
 				rend.materials = mats;
 				isGolden = true;
@@ -75,7 +81,7 @@ public class Mole : MonoBehaviour
 			}
 			else
 			{
-				Material[] mats = rend.materials;
+				var mats = rend.materials;
 				mats[ MainMatIndex ] = BadMaterial;
 				rend.materials = mats;
 				isGolden = false;
@@ -84,7 +90,7 @@ public class Mole : MonoBehaviour
 		}
 		else
 		{
-			Material[] mats = rend.materials;
+			var mats = rend.materials;
 			mats[ MainMatIndex ] = OrigMaterial;
 			rend.materials = mats;
 			isGolden = false;
@@ -98,7 +104,7 @@ public class Mole : MonoBehaviour
 	{
 		if ( !hiding )
 		{
-			this.GetAdd<AudioSource>().PlayOneShot( hitClip );
+			SAudioSource.PlayOneShot( hitClip );
 			if ( isGolden )
 				GameManager.I.
 					IncreaseScore( Mathf.RoundToInt( 3 * valueMultiplier ) );
@@ -111,17 +117,19 @@ public class Mole : MonoBehaviour
 			elementObj.gameObject.SetActive( true );
 			ElementHandler.I.SetRandomElement( elementObj );
 			isTimerStarted = true;
-			WindowsVoice.Speak( 
-				$"{elementObj.data.name}, {elementObj.data.number}." );
+			WindowsVoice.Speak(
+				$"{elementObj.Data.name} {elementObj.Data.number}." );
 			Hide();
 		}
 	}
 
 	public void Hide( )
 	{
-		Material[] mats = rend.materials;
+		var mats = rend.materials;
 		mats[ MainMatIndex ] = OrigMaterial;
 		rend.materials = mats;
+		isGolden = false;
+		isEvil = false;
 		targetPos.y = hiddenHeight;
 	}
 }

@@ -12,10 +12,10 @@ namespace HoloToolkit.MRDL.PeriodicTable
 		List<ElementData> elements;
 		Dictionary<string , Material> typeMaterials;
 
-		[Header( "Materials" ),SerializeField]
+		[Header( "Materials" ), SerializeField]
 		Material AlkaliMetal;
 		[SerializeField]
-		Material 
+		Material
 			AlkalineEarthMetal,
 			TransitionMetal,
 			Metalloid,
@@ -47,10 +47,13 @@ namespace HoloToolkit.MRDL.PeriodicTable
 			// Parse the elements out of the json file
 			TextAsset asset = Resources.Load<TextAsset>( "JSON/PeriodicTableJSON" );
 			elements = ElementsData.FromJSON( asset.text ).elements;
+			for ( int i = 0; i < elements.Count; i++ )
+			{
+				elements[ i ].category = elements[ i ].category.Trim();
+			}
 		}
 
 		public void SetRandomElement( Element elementObj ) =>
-			elementObj.SetFromElementData(
-				elements[ Random.Range( 0 , elements.Count ) ] );
+			elementObj.SetFromElementData( elements[ Random.Range( 0 , elements.Count ) ] );
 	}
 }

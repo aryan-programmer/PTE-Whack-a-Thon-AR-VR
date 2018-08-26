@@ -8,28 +8,34 @@ public class CheerleaderCoordinator : Singleton<CheerleaderCoordinator>
 	[SerializeField] new RuntimeAnimatorController animation;
 #pragma warning restore 0649
 
-	QuerySDMecanimController[] sQuerySDMecanimControllers;
+	QuerySDMecanimController[] __SQuerySDMecanimControllers;
+
+	public QuerySDMecanimController[] SQuerySDMecanimControllers => __SQuerySDMecanimControllers ?? (__SQuerySDMecanimControllers = 
+			GetComponentsInChildren<QuerySDMecanimController>( true )); 
+
 	private void Start( )
 	{
-		foreach ( QuerySDMecanimController cheerleaderP in
-			( sQuerySDMecanimControllers = GetComponentsInChildren<QuerySDMecanimController>( true ) ) )
-			cheerleaderP.
-				GetComponentInChildren<Animator>().
-				runtimeAnimatorController = animation;
+		foreach ( var cheerleaderP in SQuerySDMecanimControllers )
+		{
+			Animator animator = cheerleaderP.
+						   GetComponentInChildren<Animator>();
+			animator.applyRootMotion = false;
+			animator.runtimeAnimatorController = animation;
+		}
+
 		ChooseRandomCheerleader();
 	}
 
 	public void ChooseRandomCheerleader( )
 	{
-		foreach ( QuerySDMecanimController cheerleaderP in
-			sQuerySDMecanimControllers )
-			cheerleaderP.gameObject.SetActive( true );
+		foreach ( var cheerleaderP in SQuerySDMecanimControllers )
+			cheerleaderP.gameObject.SetActive( false );
 
-		QuerySDMecanimController cheerleader1 = sQuerySDMecanimControllers.GetRandomElement();
-		QuerySDMecanimController cheerleader2 = sQuerySDMecanimControllers.GetRandomElement();
+		QuerySDMecanimController cheerleader1 = SQuerySDMecanimControllers.GetRandomElement();
+		QuerySDMecanimController cheerleader2 = SQuerySDMecanimControllers.GetRandomElement();
 
 		while ( cheerleader1.gameObject.name == cheerleader2.gameObject.name )
-			cheerleader2 = sQuerySDMecanimControllers.GetRandomElement();
+			cheerleader2 = SQuerySDMecanimControllers.GetRandomElement();
 
 		bool cheerleader1IsOnPositivePosition = Random.Range( 0 , 2 ) == 0;
 		if ( cheerleader1IsOnPositivePosition )
@@ -46,15 +52,8 @@ public class CheerleaderCoordinator : Singleton<CheerleaderCoordinator>
 			cheerleader2.gameObject.transform.localPosition =
 				new Vector3( 2 , 0 , 0 );
 		}
-		foreach ( QuerySDMecanimController cheerleaderP in
-			sQuerySDMecanimControllers )
-		{
-			if ( cheerleaderP.gameObject.name !=
-				 cheerleader1.gameObject.name &&
-				 cheerleaderP.gameObject.name !=
-				 cheerleader2.gameObject.name )
-				cheerleaderP.gameObject.SetActive( false );
-		}
+		cheerleader1.gameObject.SetActive( true );
+		cheerleader2.gameObject.SetActive( true );
 		ChangeAnimation( CheerState.Normal );
 	}
 
@@ -73,20 +72,16 @@ public class CheerleaderCoordinator : Singleton<CheerleaderCoordinator>
 	{
 		switch ( state )
 		{
-		case CheerState.Normal:
-			ChangeAnim( state );
-			yield return null;
-			break;
 		case CheerState.Score:
 		case CheerState.AntiScore:
 			ChangeAnim( state );
 			yield return new WaitForSeconds( 2.5f );
 			ChangeAnim( CheerState.Normal );
 			break;
+		case CheerState.Normal:
 		case CheerState.Win:
 		case CheerState.Lose:
 			ChangeAnim( state );
-			yield return null;
 			break;
 		default:
 			break;
@@ -95,9 +90,8 @@ public class CheerleaderCoordinator : Singleton<CheerleaderCoordinator>
 	}
 	void ChangeAnim( CheerState state )
 	{
-		int? stateOfMotion = null;
-		foreach ( QuerySDMecanimController mechanimController in
-			GetComponentsInChildren<QuerySDMecanimController>() )
+		int stateOfMotion = Random.Range( 0 , 3 );
+		foreach ( var mechanimController in SQuerySDMecanimControllers )
 		{
 			switch ( state )
 			{
@@ -108,8 +102,6 @@ public class CheerleaderCoordinator : Singleton<CheerleaderCoordinator>
 					QueryChanSDAnimationType.NORMAL_IDLE );
 				break;
 			case CheerState.Score:
-				if ( stateOfMotion != null )
-					stateOfMotion = Random.Range( 0 , 3 );
 				mechanimController.
 					ChangeAnimation(
 					// if
