@@ -1,29 +1,32 @@
 BEGIN_VALUES = "qc" --file
 ENDING_FLAGS = --language CS
 
-CheerleaderCoordinator.cs: CheerleaderCoordinator.qc
+ARVRObjectEnableControl.cs: ARVRObjectEnableControl.uqc
 	$(BEGIN_VALUES) $< $(ENDING_FLAGS)
 
-GameManager.cs: GameManager.qc
+CheerleaderCoordinator.cs: CheerleaderCoordinator.uqc
 	$(BEGIN_VALUES) $< $(ENDING_FLAGS)
 
-Hammer.cs: Hammer.qc
+GameManager.cs: GameManager.uqc
 	$(BEGIN_VALUES) $< $(ENDING_FLAGS)
 
-Mole.cs: Mole.qc
+Hammer.cs: Hammer.uqc
 	$(BEGIN_VALUES) $< $(ENDING_FLAGS)
 
-Player.cs: Player.qc
+Mole.cs: Mole.uqc
 	$(BEGIN_VALUES) $< $(ENDING_FLAGS)
 
-VRUIButton.cs: VRUIButton.qc
+SceneSwitcher.cs: SceneSwitcher.uqc
 	$(BEGIN_VALUES) $< $(ENDING_FLAGS)
 
-VRUIEventSystem.cs: VRUIEventSystem.qc
+Speaker.cs: Speaker.uqc
 	$(BEGIN_VALUES) $< $(ENDING_FLAGS)
 
-all: CheerleaderCoordinator.cs, GameManager.cs, Hammer.cs, Mole.cs, Player.cs, VRUIButton.cs, VRUIEventSystem.cs
+WebCamDisplay.cs: WebCamDisplay.uqc
+	$(BEGIN_VALUES) $< $(ENDING_FLAGS)
+
+all: ARVRObjectEnableControl.cs CheerleaderCoordinator.cs GameManager.cs Hammer.cs Mole.cs SceneSwitcher.cs Speaker.cs WebCamDisplay.cs 
 	echo "All done."
 
 clean: 
-	del CheerleaderCoordinator.cs GameManager.cs Hammer.cs Mole.cs Player.cs VRUIButton.cs VRUIEventSystem.cs
+	del ARVRObjectEnableControl.cs CheerleaderCoordinator.cs GameManager.cs Hammer.cs Mole.cs SceneSwitcher.cs Speaker.cs WebCamDisplay.cs 

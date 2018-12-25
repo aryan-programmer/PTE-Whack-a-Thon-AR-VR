@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
 public class WindowsVoice : MonoBehaviour
 {
 	[DllImport( "WindowsVoice" )]
@@ -45,3 +46,4 @@ public class WindowsVoice : MonoBehaviour
 		return sb.ToString();
 	}
 }
+#endif

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Utilities.Extensions;
 public
-class CheerleaderCoordinator : Singleton<CheerleaderCoordinator>
+class CheerleaderCoordinator : Singleton_<CheerleaderCoordinator>
 {
 	#pragma warning disable 0649
 	[SerializeField] new RuntimeAnimatorController animation;

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace HoloToolkit.MRDL.PeriodicTable
 {
-	public class ElementHandler : Singleton<ElementHandler>
+	public class ElementHandler : Singleton_<ElementHandler>
 	{
 		List<ElementData> elements;
 		Dictionary<string , Material> typeMaterials;

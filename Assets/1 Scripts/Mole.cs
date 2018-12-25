@@ -10,7 +10,6 @@ class Mole : MonoBehaviour
 	[SerializeField] int MainMatIndex;
 	[SerializeField] Renderer rend;
 	[SerializeField] Material GoldenMaterial, BadMaterial, OrigMaterial;
-	[SerializeField] AudioClip hitClip;
 	[SerializeField] Element elementObj;
 	#pragma warning restore 0649
 	bool isGolden, isEvil, hiding;
@@ -29,25 +28,13 @@ class Mole : MonoBehaviour
 		}
 
 	}
-	public
-	AudioSource SAudioSource
-	{
-
-		get
-		{
-			return __audioSource ?? ( __audioSource = this.GetAdd<AudioSource>() );
-
-
-		}
-
-	}
 	AudioSource __audioSource;
 	void Start( )
 	{
 
 		if(rend == null)
 		{
-			rend = this.Get<Renderer>();
+			rend = GetComponent<Renderer>();
 
 		}
 		timer = new Timer( 2 , delegate ( )
@@ -117,12 +104,12 @@ class Mole : MonoBehaviour
 
 	}
 	public
-	void OnHit( )
+	void Hit( )
 	{
 
 		if(!hiding)
 		{
-			SAudioSource.PlayOneShot( hitClip );
+			Hammer.I.Hit( transform.position );
 			if(isGolden)
 			{
 				GameManager.I.IncreaseScore( Mathf.RoundToInt( 3 * valueMultiplier ) );
@@ -142,7 +129,7 @@ class Mole : MonoBehaviour
 			elementObj.gameObject.SetActive( true );
 			ElementHandler.I.SetRandomElement( elementObj );
 			isTimerStarted = true;
-			WindowsVoice.Speak( $@"{elementObj.Data.name} {elementObj.Data.number}."
+			Speaker.Speak( $@"{elementObj.Data.name} {elementObj.Data.number}."
 			);
 			Hide();
 

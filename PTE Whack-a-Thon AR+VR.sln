@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTE Whack-a-Thon AR+VR", "Assembly-CSharp.csproj", "{496F6227-A76D-5522-2C99-496F27CD7E7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTE Whack-a-Thon AR+VR", "Assembly-CSharp-firstpass.csproj", "{044F078A-A0A9-243C-B2EC-A59A9666A873}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTE Whack-a-Thon AR+VR", "Assembly-CSharp-Editor.csproj", "{35557778-616B-8569-84EA-4C63ED484F01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{496F6227-A76D-5522-2C99-496F27CD7E7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496F6227-A76D-5522-2C99-496F27CD7E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496F6227-A76D-5522-2C99-496F27CD7E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496F6227-A76D-5522-2C99-496F27CD7E7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{044F078A-A0A9-243C-B2EC-A59A9666A873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{044F078A-A0A9-243C-B2EC-A59A9666A873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{044F078A-A0A9-243C-B2EC-A59A9666A873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{044F078A-A0A9-243C-B2EC-A59A9666A873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35557778-616B-8569-84EA-4C63ED484F01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35557778-616B-8569-84EA-4C63ED484F01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35557778-616B-8569-84EA-4C63ED484F01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35557778-616B-8569-84EA-4C63ED484F01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

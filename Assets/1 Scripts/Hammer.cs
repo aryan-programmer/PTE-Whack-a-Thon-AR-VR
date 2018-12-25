@@ -1,6 +1,6 @@
 using UnityEngine;
 public
-class Hammer : Singleton<Hammer>
+class Hammer : Singleton_<Hammer>
 {
 	#pragma warning disable 0649
 	[SerializeField] float speed;

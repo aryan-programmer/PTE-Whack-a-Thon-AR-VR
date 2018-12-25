@@ -3,7 +3,7 @@ using Utilities.Extensions;
 using Utilities;
 using Utilities.Timers;
 public
-class GameManager : Singleton<GameManager>
+class GameManager : Singleton_<GameManager>
 {
 
 	enum ScreenType
@@ -12,7 +12,7 @@ class GameManager : Singleton<GameManager>
 
 	}
 	#pragma warning disable 0649
-	[SerializeField] GameObject moleContainer, fullArcadeGameObject;
+	[SerializeField] GameObject moleContainer;
 	[SerializeField] RandomizedIncreaseingTimer.Initializer initializer;
 	[Header( "Gui Elements" )]
 	[SerializeField] TextMesh ScoreText;
@@ -29,7 +29,6 @@ class GameManager : Singleton<GameManager>
 	bool GameIsRunning;
 	void Start( )
 	{
-		fullArcadeGameObject.SetActive( !Application.isEditor );
 		CheerleaderCoordinator.ChangeAnimation( CheerleaderCoordinator.CheerState.Normal );
 		screens = new GameObject[] { StartScreen , PlayScreen , PauseScreen , GameOverScreen , HelpScreen };
 		moles = moleContainer.GetComponentsInChildren<Mole>();
@@ -135,7 +134,8 @@ class GameManager : Singleton<GameManager>
 	{
 		GameIsRunning = false;
 		SetEnabledScreen( ScreenType.GameOver );
-		ScoreEndText.text = $@"Game Over! You got\n{score} points!!"
+		ScoreEndText.text = $@"Game Over! You got
+{score} points!!"
 		;
 		var isNewHighScore = PlayerPrefsManager.IsNewHighscore( score );
 		NewHighscoreTextDisplay.gameObject.SetActive( isNewHighScore );

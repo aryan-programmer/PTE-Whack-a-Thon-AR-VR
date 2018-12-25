@@ -15,32 +15,41 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:icon="@drawable/app_icon"
-                 android:label="@string/app_name">
-        <activity android:name="com.unity3d.player.UnityPlayerActivity"
-                  android:label="@string/app_name"
-                  android:screenOrientation="landscape"
-                  android:launchMode="singleTask"
-                  android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.google.intent.category.CARDBOARD" />
-            </intent-filter>
-            <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
-        </activity>
-        <meta-data android:name="IMMERSIVE_MODE" android:value="true" />
-    </application>
-    <!-- Set target sdk version to Lollipop to prevent issues with Marshmallow's runtime permissions. -->
-    <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="24" />
-    <uses-feature android:glEsVersion="0x00020000" />
-    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true"/>
-    <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="true"/>
-    <uses-permission android:name="android.permission.NFC"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+  <application android:icon="@drawable/app_icon"
+               android:label="@string/app_name">
+    <activity android:name="com.google.unity.UnityPlayerActivity"
+              android:label="@string/app_name"
+              android:screenOrientation="landscape"
+              android:launchMode="singleTask"
+              android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+        <category android:name="com.google.intent.category.CARDBOARD" />
+      </intent-filter>
+      <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+      <meta-data android:name="unityplayer.SkipPermissionsDialog" android:value="false"/>
+    </activity>
+    <meta-data android:name="IMMERSIVE_MODE" android:value="true" />
+  </application>
+  <!-- Set target sdk version to Lollipop to prevent issues with Marshmallow's runtime permissions. -->
+  <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="24" />
+  <uses-feature android:glEsVersion="0x00020000" />
+  <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true"/>
+  <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="true"/>
+  <uses-permission android:name="android.permission.NFC"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- VR feature tags. -->
-    <uses-feature android:name="android.software.vr.mode" android:required="false"/>
-    <uses-feature android:name="android.hardware.vr.high_performance" android:required="false"/>
+  <!-- camera permission -->
+  <uses-permission android:name="android.permission.CAMERA"/>
+  <uses-permission android:name="android.hardware.camera"/>
+  <uses-feature android:name="android.hardware.camera"/>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+  <!-- VR feature tags. -->
+  <uses-feature android:name="android.software.vr.mode" android:required="false"/>
+  <uses-feature android:name="android.hardware.vr.high_performance" android:required="false"/>
 </manifest>
